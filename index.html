@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GradWork AU — Jobs for International Students in Australia</title>
+  <style>
+    /* ── Design tokens ─────────────────────────────────────────────── */
+    :root {
+      --primary:       #4F46E5;
+      --primary-dark:  #3730A3;
+      --primary-light: #EEF2FF;
+      --green:         #10B981;
+      --green-light:   #ECFDF5;
+      --amber:         #F59E0B;
+      --amber-light:   #FFFBEB;
+      --red:           #EF4444;
+      --bg:            #F8FAFC;
+      --card:          #FFFFFF;
+      --text:          #1E293B;
+      --muted:         #64748B;
+      --border:        #E2E8F0;
+      --shadow:        0 1px 3px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:     0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -2px rgba(0,0,0,.06);
+      --shadow-lg:     0 10px 15px -3px rgba(0,0,0,.10), 0 4px 6px -4px rgba(0,0,0,.05);
+      --radius:        12px;
+      --radius-sm:     8px;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Utilities ─────────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .25rem .7rem; border-radius: 999px;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .bg-green  { background: var(--green-light);  color: #065F46; }
+    .bg-blue   { background: var(--primary-light); color: #3730A3; }
+    .bg-amber  { background: var(--amber-light);   color: #92400E; }
+    .bg-gray   { background: #F1F5F9; color: #475569; }
+    .bg-purple { background: #F5F3FF; color: #5B21B6; }
+    .bg-red    { background: #FEF2F2; color: #991B1B; }
+    .bg-sky    { background: #F0F9FF; color: #0369A1; }
+
+    /* ── Navigation ────────────────────────────────────────────────── */
+    #navbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo {
+      display: flex; align-items: center; gap: .5rem;
+      font-weight: 800; font-size: 1.2rem; color: var(--primary);
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg,#4F46E5,#7C3AED);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem; font-weight: 900; letter-spacing: -.05em;
+    }
+    .nav-links { display: flex; align-items: center; gap: .15rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-size: .875rem; font-weight: 500;
+      padding: .5rem .85rem; border-radius: var(--radius-sm); transition: all .15s;
+    }
+    .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
+    .nav-cta { background: var(--primary) !important; color: #fff !important; font-weight: 600 !important; }
+    .nav-cta:hover { background: var(--primary-dark) !important; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: .4rem;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+    .nav-mobile-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-mobile-open .hamburger span:nth-child(2) { opacity: 0; }
+    .nav-mobile-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Hero ──────────────────────────────────────────────────────── */
+    #hero {
+      background: linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#4338ca 70%,#6d28d9 100%);
+      padding: 5rem 0 4rem; color: #fff; overflow: hidden; position: relative;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: -50%; right: -8%;
+      width: 580px; height: 580px; border-radius: 50%;
+      background: radial-gradient(circle,rgba(139,92,246,.25) 0%,transparent 70%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: ''; position: absolute; bottom: -30%; left: -5%;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle,rgba(99,102,241,.2) 0%,transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 740px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      padding: .35rem 1rem; border-radius: 999px;
+      font-size: .8rem; font-weight: 600; margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+    .hero-eyebrow span { font-size: .9rem; }
+    #hero h1 { font-size: clamp(2rem,5vw,3.25rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.25rem; }
+    #hero h1 em { font-style: normal; background: linear-gradient(135deg,#a5b4fc,#c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    #hero p { font-size: 1.1rem; opacity: .82; max-width: 540px; margin-bottom: 2rem; }
+
+    .search-box {
+      display: flex; gap: .6rem;
+      background: rgba(255,255,255,.12); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: var(--radius); padding: .45rem;
+      max-width: 600px;
+    }
+    #heroSearch {
+      flex: 1; border: none; background: transparent; color: #fff;
+      font-size: .9875rem; padding: .6rem .875rem; outline: none; min-width: 0;
+    }
+    #heroSearch::placeholder { color: rgba(255,255,255,.5); }
+    .search-box button {
+      background: #fff; color: var(--primary);
+      border: none; padding: .6rem 1.5rem;
+      border-radius: 8px; font-weight: 700; font-size: .9375rem;
+      transition: transform .2s, box-shadow .2s; white-space: nowrap;
+    }
+    .search-box button:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.75rem;
+    }
+    .stat-num { font-size: 1.9rem; font-weight: 800; line-height: 1; }
+    .stat-label { font-size: .78rem; opacity: .65; margin-top: .2rem; }
+
+    /* ── Filter bar ────────────────────────────────────────────────── */
+    #filterBar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 1rem 0; position: sticky; top: 60px; z-index: 150;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .filters-row {
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+    }
+    .filter-label { font-size: .8rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .filter-select {
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: .48rem .875rem; font-size: .875rem; color: var(--text); background: #fff;
+      outline: none; transition: border-color .2s; min-width: 130px; cursor: pointer;
+    }
+    .filter-select:focus { border-color: var(--primary); }
+    .visa-toggle {
+      display: flex; align-items: center; gap: .45rem;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: .48rem .875rem; font-size: .875rem; font-weight: 500; color: var(--muted);
+      background: #fff; transition: all .2s; white-space: nowrap;
+    }
+    .visa-toggle.on { border-color: var(--green); background: var(--green-light); color: #065F46; }
+    .visa-toggle .knob {
+      width: 30px; height: 17px; border-radius: 999px; background: var(--border);
+      position: relative; transition: background .2s; flex-shrink: 0;
+    }
+    .visa-toggle.on .knob { background: var(--green); }
+    .visa-toggle .knob::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 13px; height: 13px; border-radius: 50%; background: #fff;
+      transition: transform .2s;
+    }
+    .visa-toggle.on .knob::after { transform: translateX(13px); }
+    .results-count { margin-left: auto; font-size: .8rem; color: var(--muted); white-space: nowrap; }
+    #clearFilters { font-size: .8rem; color: var(--primary); font-weight: 600; background: none; border: none; padding: .4rem; }
+
+    /* ── Jobs section ──────────────────────────────────────────────── */
+    #jobs { padding: 2.5rem 0 4rem; }
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* job card */
+    .job-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      transition: all .18s; cursor: pointer; position: relative; overflow: hidden;
+    }
+    .job-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .job-card.visa-ok::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg,#10B981,#34D399);
+    }
+    .card-top { display: flex; align-items: flex-start; gap: .85rem; margin-bottom: .9rem; }
+    .c-logo {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .9rem; color: #fff;
+      border: 1.5px solid rgba(0,0,0,.06);
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-title { font-size: 1rem; font-weight: 700; line-height: 1.3; margin-bottom: .2rem; }
+    .card-company { font-size: .875rem; color: var(--muted); }
+    .save-btn {
+      background: none; border: none; font-size: 1.3rem; color: var(--border);
+      padding: .25rem; transition: color .2s; flex-shrink: 0; line-height: 1;
+    }
+    .save-btn.saved { color: var(--primary); }
+    .card-meta { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .8rem; }
+    .card-desc {
+      font-size: .855rem; color: var(--muted); line-height: 1.5; margin-bottom: .9rem;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: .85rem; border-top: 1px solid var(--border);
+    }
+    .card-salary { font-size: .875rem; font-weight: 700; }
+    .card-posted { font-size: .78rem; color: var(--muted); }
+    .apply-btn {
+      background: var(--primary); color: #fff; border: none;
+      padding: .48rem 1.2rem; border-radius: var(--radius-sm);
+      font-size: .875rem; font-weight: 600; text-decoration: none;
+      transition: background .2s;
+    }
+    .apply-btn:hover { background: var(--primary-dark); }
+    .no-results {
+      grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--muted);
+    }
+    .no-results .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .no-results h3 { font-size: 1.25rem; margin-bottom: .5rem; color: var(--text); }
+
+    /* section shared */
+    .section { padding: 4.5rem 0; }
+    .section-alt { background: #fff; }
+    .s-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); margin-bottom: .5rem; }
+    .s-title { font-size: clamp(1.5rem,3vw,2.15rem); font-weight: 800; margin-bottom: .75rem; }
+    .s-sub { color: var(--muted); max-width: 580px; margin-bottom: 2.5rem; font-size: .9625rem; }
+
+    /* ── Work Rights ───────────────────────────────────────────────── */
+    .tabs-nav {
+      display: flex; border-bottom: 2px solid var(--border);
+      margin-bottom: 2.25rem; overflow-x: auto; gap: 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-btn {
+      padding: .9rem 1.5rem; border: none; background: transparent;
+      font-size: .9375rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; border-bottom: 2.5px solid transparent;
+      margin-bottom: -2px; transition: all .2s; white-space: nowrap;
+    }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    .alert {
+      display: flex; gap: .9rem; align-items: flex-start;
+      border-radius: var(--radius); padding: 1.1rem 1.4rem; margin-bottom: 1.5rem;
+    }
+    .alert-amber { background: var(--amber-light); border: 1.5px solid #FCD34D; }
+    .alert-green  { background: var(--green-light);  border: 1.5px solid #6EE7B7; }
+    .alert-blue   { background: var(--primary-light); border: 1.5px solid #A5B4FC; }
+    .alert-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .alert strong { display: block; margin-bottom: .2rem; }
+    .alert-amber strong { color: #92400E; }
+    .alert-amber p  { color: #78350F; font-size: .9375rem; }
+    .alert-green strong { color: #065F46; }
+    .alert-green p  { color: #064E3B; font-size: .9375rem; }
+    .alert-blue strong { color: #3730A3; }
+    .alert-blue p  { color: #312E81; font-size: .9375rem; }
+
+    .info-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .info-card {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+    }
+    .info-card h4 { margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; font-size: 1rem; }
+    .info-card ul { list-style: none; }
+    .info-card li {
+      font-size: .9375rem; padding: .5rem 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: .6rem;
+    }
+    .info-card li:last-child { border-bottom: none; }
+    .info-card li::before { content: '→'; color: var(--primary); font-weight: 700; flex-shrink: 0; margin-top: .1em; }
+
+    .visa-table {
+      width: 100%; border-collapse: collapse; font-size: .9rem;
+      border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--border);
+    }
+    .visa-table th {
+      background: var(--primary); color: #fff; text-align: left;
+      padding: .85rem 1.1rem; font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    }
+    .visa-table td { padding: .875rem 1.1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .visa-table tr:last-child td { border-bottom: none; }
+    .visa-table tr:nth-child(even) td { background: #F8FAFC; }
+
+    .path-steps {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .path-step {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem;
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .875rem;
+    }
+    .path-step h4 { font-size: .9375rem; }
+    .path-step p { font-size: .855rem; color: var(--muted); }
+
+    /* ── Checklist ─────────────────────────────────────────────────── */
+    .checklist-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.4rem;
+    }
+    .cl-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+    }
+    .cl-card-head {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: 1.2rem;
+    }
+    .cl-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .cl-card h3 { font-size: 1rem; }
+    .cl-item {
+      display: flex; align-items: flex-start; gap: .7rem;
+      padding: .6rem 0; border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none;
+    }
+    .cl-item:last-of-type { border-bottom: none; }
+    .cl-box {
+      width: 20px; height: 20px; border: 2px solid var(--border);
+      border-radius: 5px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .18s; margin-top: .1rem;
+    }
+    .cl-item.done .cl-box { background: var(--green); border-color: var(--green); }
+    .cl-item.done .cl-box::after { content: '✓'; color: #fff; font-size: .7rem; font-weight: 800; }
+    .cl-text { font-size: .9375rem; line-height: 1.4; transition: color .2s; }
+    .cl-item.done .cl-text { text-decoration: line-through; color: var(--muted); }
+    .cl-progress {
+      display: flex; align-items: center; gap: .75rem;
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+    .prog-bar { flex: 1; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .prog-fill { height: 100%; background: var(--green); border-radius: 999px; transition: width .3s; }
+    .prog-text { font-size: .78rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+
+    /* ── Resources ─────────────────────────────────────────────────── */
+    .resources-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 1.2rem;
+    }
+    .res-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+      text-decoration: none; color: inherit;
+      transition: all .18s;
+      display: flex; flex-direction: column; gap: .875rem;
+    }
+    .res-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .res-logo {
+      width: 50px; height: 50px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; border: 1.5px solid var(--border);
+    }
+    .res-card h3 { font-size: 1rem; }
+    .res-card p { font-size: .875rem; color: var(--muted); flex: 1; }
+    .res-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .res-link {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .875rem; font-weight: 700; color: var(--primary); margin-top: auto;
+    }
+
+    /* ── Footer ────────────────────────────────────────────────────── */
+    footer {
+      background: #0F172A; color: rgba(255,255,255,.65);
+      padding: 3.5rem 0 2rem;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: .8rem; }
+    .footer-brand p { font-size: .875rem; line-height: 1.6; max-width: 260px; }
+    .footer-col h4 { color: #fff; font-size: .875rem; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .footer-col a { text-decoration: none; font-size: .875rem; transition: color .2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      font-size: .8125rem;
+    }
+    .disclaimer { max-width: 520px; }
+
+    /* ── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      #mobileMenu {
+        display: none; position: absolute; top: 60px; left: 0; right: 0;
+        background: #fff; border-bottom: 1px solid var(--border); padding: 1rem 1.5rem;
+        flex-direction: column; gap: .25rem; z-index: 250;
+      }
+      #mobileMenu.open { display: flex; }
+      #mobileMenu a {
+        display: block; text-decoration: none; color: var(--text);
+        font-size: .9375rem; font-weight: 500; padding: .75rem .875rem;
+        border-radius: var(--radius-sm); transition: background .15s;
+      }
+      #mobileMenu a:hover { background: var(--primary-light); color: var(--primary); }
+      .info-2col { grid-template-columns: 1fr; }
+      .jobs-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 540px) {
+      #hero { padding: 3rem 0 2.5rem; }
+      .search-box { flex-direction: column; }
+      .hero-stats { flex-wrap: wrap; gap: 1rem; }
+      .path-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .path-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <div class="logo-mark">G</div>
+        GradWork&nbsp;<span style="opacity:.5;font-weight:400">AU</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#jobs">Job Board</a></li>
+        <li><a href="#workrights">Work Rights</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#jobs" class="nav-cta">Find Jobs</a></li>
+      </ul>
+      <button class="hamburger" id="hamBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu">
+    <a href="#jobs"       onclick="closeMobile()">Job Board</a>
+    <a href="#workrights" onclick="closeMobile()">Work Rights</a>
+    <a href="#checklist"  onclick="closeMobile()">Checklist</a>
+    <a href="#resources"  onclick="closeMobile()">Resources</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span>🇦🇺</span> Built for international students in Australia</div>
+      <h1>Land your first <em>Australian job</em> — visa included.</h1>
+      <p>We surface roles that sponsor visas or welcome student work rights, so you can filter out the noise and focus on real opportunities.</p>
+      <div class="search-box">
+        <input type="text" id="heroSearch" placeholder="Search by role, company, or skill…" autocomplete="off" />
+        <button onclick="doSearch()">Search Jobs</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num" id="countVisible">20</div><div class="stat-label">Live listings</div></div>
+        <div class="stat"><div class="stat-num">12</div><div class="stat-label">Visa-sponsoring roles</div></div>
+        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Industries covered</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FILTER BAR
+════════════════════════════════════════════════════════════ -->
+<div id="filterBar">
+  <div class="container">
+    <div class="filters-row">
+      <span class="filter-label">Filter:</span>
+
+      <select class="filter-select" id="fType" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option value="graduate">Graduate</option>
+        <option value="internship">Internship</option>
+        <option value="full-time">Full-time</option>
+        <option value="part-time">Part-time</option>
+      </select>
+
+      <select class="filter-select" id="fIndustry" onchange="applyFilters()">
+        <option value="">All Industries</option>
+        <option value="tech">Technology</option>
+        <option value="finance">Finance</option>
+        <option value="consulting">Consulting</option>
+        <option value="engineering">Engineering</option>
+        <option value="marketing">Marketing</option>
+        <option value="healthcare">Healthcare</option>
+        <option value="hospitality">Hospitality</option>
+        <option value="retail">Retail</option>
+        <option value="education">Education</option>
+      </select>
+
+      <select class="filter-select" id="fLocation" onchange="applyFilters()">
+        <option value="">All Locations</option>
+        <option value="Sydney">Sydney</option>
+        <option value="Melbourne">Melbourne</option>
+        <option value="Brisbane">Brisbane</option>
+        <option value="Perth">Perth</option>
+        <option value="Adelaide">Adelaide</option>
+      </select>
+
+      <button class="visa-toggle" id="visaBtn" onclick="toggleVisa()">
+        <div class="knob"></div>
+        <span>Visa Sponsorship Only</span>
+      </button>
+
+      <span class="results-count" id="resultCount">Showing 20 jobs</span>
+      <button id="clearFilters" onclick="clearFilters()">Clear filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     JOBS GRID
+════════════════════════════════════════════════════════════ -->
+<section id="jobs">
+  <div class="container">
+    <div class="jobs-grid" id="jobsGrid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     WORK RIGHTS
+════════════════════════════════════════════════════════════ -->
+<section id="workrights" class="section section-alt">
+  <div class="container">
+    <div class="s-label">Know Your Rights</div>
+    <h2 class="s-title">Work rights for international students</h2>
+    <p class="s-sub">Understanding what you can and can't do legally is the foundation of your job search. Here's what you need to know as an international student in Australia.</p>
+
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab('student')">🎓 Student Visa (500)</button>
+      <button class="tab-btn" onclick="openTab('485')">🌏 485 Graduate Visa</button>
+      <button class="tab-btn" onclick="openTab('other')">📋 Other Visas</button>
+      <button class="tab-btn" onclick="openTab('vevo')">🔍 VEVO & Compliance</button>
+    </div>
+
+    <!-- STUDENT VISA 500 -->
+    <div class="tab-pane active" id="tab-student">
+      <div class="alert alert-amber">
+        <div class="alert-icon">⚠️</div>
+        <div>
+          <strong>Important: Work hour limits apply during study</strong>
+          <p>On a student visa (subclass 500) you are limited to <strong>48 hours per fortnight</strong> while your course is in session. Breaching this limit is a serious visa condition violation and can result in your visa being cancelled.</p>
+        </div>
+      </div>
+      <div class="info-2col">
+        <div class="info-card">
+          <h4>📚 During Study Periods</h4>
+          <ul>
+            <li>Maximum <strong>48 hours per fortnight</strong> (approx. 24 hrs/week)</li>
+            <li>Applies when your course is in session</li>
+            <li>Includes all paid employment — casual, part-time, volunteer with stipend</li>
+            <li>Your partner/spouse may also be subject to hour limits depending on visa subclass</li>
+            <li>Hours reset every fortnightly period — you cannot "carry over"</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>☀️ During Scheduled Breaks</h4>
+          <ul>
+            <li><strong>Unlimited hours</strong> during official scheduled course breaks (e.g., summer holidays)</li>
+            <li>Break must be scheduled by your institution — not a personal leave period</li>
+            <li>Keep evidence of official semester dates in case you're ever asked</li>
+            <li>If your course ends, contact your institution about enrollment status</li>
+            <li>Great opportunity for full-time holiday work or internships</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>✅ Eligible Work Types</h4>
+          <ul>
+            <li>Casual hospitality, retail, admin roles</li>
+            <li>Paid internships and work placements</li>
+            <li>Part-time professional roles</li>
+            <li>Research assistant and tutoring roles</li>
+            <li>Freelance / ABN work (still counts toward 48-hour limit)</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🚫 Restrictions to Know</h4>
+          <ul>
+            <li>You cannot work before your course commences</li>
+            <li>You cannot work if your visa has a "no work" condition (8105 condition)</li>
+            <li>Volunteering for a business that employs paid workers may count as work</li>
+            <li>Uber Eats, food delivery — counts toward the 48-hour limit</li>
+            <li>Check your visa grant letter for specific conditions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 485 VISA -->
+    <div class="tab-pane" id="tab-485">
+      <div class="alert alert-green">
+        <div class="alert-icon">🎉</div>
+        <div>
+          <strong>No work hour restrictions on the 485!</strong>
+          <p>The Temporary Graduate visa (subclass 485) allows you to work full-time with no restrictions. This visa is specifically designed to help you transition from study to work in Australia.</p>
+        </div>
+      </div>
+      <table class="visa-table">
+        <thead>
+          <tr>
+            <th>Stream</th>
+            <th>Eligibility</th>
+            <th>Duration</th>
+            <th>Key Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Graduate Work</strong></td>
+            <td>Completed an eligible qualification in a skilled occupation on the MLTSSL</td>
+            <td>18 months</td>
+            <td>Skills assessment by a relevant assessing authority</td>
+          </tr>
+          <tr>
+            <td><strong>Post-Study Work</strong></td>
+            <td>Completed any bachelor's, master's, or doctoral degree in Australia</td>
+            <td>2 yrs (bachelor/master), 3 yrs (coursework master), 4 yrs (doctoral/honours)</td>
+            <td>Degree must be from an Australian institution (not offshore)</td>
+          </tr>
+          <tr>
+            <td><strong>Regional Extension</strong></td>
+            <td>Lived and studied in a regional area</td>
+            <td>+1 year extension on top of Post-Study Work</td>
+            <td>Study must have been in a regional postcode</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="step-num">1</div>
+          <h4>Graduate your course</h4>
+          <p>Receive your official course completion letter or testamur from your university.</p>
+        </div>
+        <div class="path-step">
+          <div class="step-num">2</div>
+          <h4>Lodge within deadline</h4>
+          <p>Apply for the 485 within 6 months of your course completion. Don't miss this window.</p>
+        </div>
+        <div class="path-step">
+          <div class="step-num">3</div>
+          <h4>Bridging visa</h4>
+          <p>You'll receive a Bridging Visa A (BVA) letting you stay and work while the 485 is processed.</p>
+        </div>
+        <div class="path-step">
+          <div class="step-num">4</div>
+          <h4>Work full-time</h4>
+          <p>Once granted, work in any occupation with no restrictions anywhere in Australia.</p>
+        </div>
+        <div class="path-step">
+          <div class="step-num">5</div>
+          <h4>Plan your next visa</h4>
+          <p>Use the 485 period to build PR-worthy experience for employer nomination or points-based visas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER VISAS -->
+    <div class="tab-pane" id="tab-other">
+      <div class="info-2col">
+        <div class="info-card">
+          <h4>💼 Employer-Sponsored Visas</h4>
+          <ul>
+            <li><strong>TSS visa (482):</strong> Employer nominates you for a specific occupation. 2–4 years, pathway to PR</li>
+            <li><strong>ENS visa (186):</strong> Permanent visa via employer nomination — requires 3 years work experience</li>
+            <li><strong>RSMS (187):</strong> For regional employer nomination — leads directly to PR</li>
+            <li>Employer pays nomination and visa fees for these streams</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🌟 Skilled Independent (189 &amp; 190)</h4>
+          <ul>
+            <li><strong>189 Skilled Independent:</strong> Points-based, no employer/state needed. Score 65+ points</li>
+            <li><strong>190 Skilled Nominated:</strong> State nominates you — earns extra 5 points toward PR</li>
+            <li>Points scored on age, English, work experience, qualifications</li>
+            <li>Use the 485 visa to build Australian work experience for more points</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🤝 Working Holiday Visa (417 / 462)</h4>
+          <ul>
+            <li>Available to citizens of eligible countries aged 18–30 (or 35 for some)</li>
+            <li>Work anywhere in Australia for 12 months, extendable to 3 years</li>
+            <li>6-month work limit with any single employer</li>
+            <li>Popular for part-time and regional work while studying or after graduation</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🎓 Post-Graduate Sponsorship</h4>
+          <ul>
+            <li>Many Graduate Programs are structured to sponsor you on a 482 TSS after your 485 expires</li>
+            <li>Big 4 banks, Big 4 consulting, major tech companies all commonly sponsor</li>
+            <li>Ask HR during the interview process about visa support policy</li>
+            <li>Some companies have a standard 2-year service requirement before sponsoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEVO -->
+    <div class="tab-pane" id="tab-vevo">
+      <div class="alert alert-blue">
+        <div class="alert-icon">ℹ️</div>
+        <div>
+          <strong>Employers must check your work rights</strong>
+          <p>Under Australian law, your employer is required to verify your work rights before engaging you. They will typically use VEVO (Visa Entitlement Verification Online) to do this.</p>
+        </div>
+      </div>
+      <div class="info-2col">
+        <div class="info-card">
+          <h4>🔍 What is VEVO?</h4>
+          <ul>
+            <li>Visa Entitlement Verification Online — free government service</li>
+            <li>Employers use it to verify visa conditions and work rights instantly</li>
+            <li>You can also check your own work rights at immi.homeaffairs.gov.au/visas/already-have-a-visa/check-visa-details-and-conditions/check-conditions-online</li>
+            <li>Share your VEVO results proactively with new employers</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>📄 Documents for Onboarding</h4>
+          <ul>
+            <li><strong>Passport</strong> — valid and not expired</li>
+            <li><strong>Visa grant notification</strong> — email from Department of Home Affairs</li>
+            <li><strong>Confirmation of Enrolment (CoE)</strong> — shows current student status</li>
+            <li><strong>Tax File Number (TFN)</strong> — apply through ATO before starting work</li>
+            <li><strong>Bank account details</strong> — Australian bank account for salary payments</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>⚡ Common Mistakes to Avoid</h4>
+          <ul>
+            <li>Working more than 48 hours per fortnight during study — this is a visa breach</li>
+            <li>Starting work before your course officially starts</li>
+            <li>Not declaring your visa status to an employer — they find out via VEVO anyway</li>
+            <li>Letting your CoE lapse — always maintain enrolment if on a student visa</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>📞 Getting Help</h4>
+          <ul>
+            <li><strong>Department of Home Affairs:</strong> 131 881 (inside Australia)</li>
+            <li><strong>International Student Welfare:</strong> your university's international office</li>
+            <li><strong>Fair Work Ombudsman:</strong> 13 13 94 — for wage theft or unfair treatment</li>
+            <li><strong>Migration agent:</strong> Registered Migration Agents (MARN number) for visa advice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CHECKLIST
+════════════════════════════════════════════════════════════ -->
+<section id="checklist" class="section">
+  <div class="container">
+    <div class="s-label">Pre-Application Checklist</div>
+    <h2 class="s-title">Everything you need before you apply</h2>
+    <p class="s-sub">Tick off each item as you complete it — your progress is saved automatically.</p>
+
+    <div class="checklist-grid" id="checklistGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     RESOURCES
+════════════════════════════════════════════════════════════ -->
+<section id="resources" class="section section-alt">
+  <div class="container">
+    <div class="s-label">External Resources</div>
+    <h2 class="s-title">International-student friendly job sites</h2>
+    <p class="s-sub">These platforms are well-known in Australia and commonly used by international students to find graduate, part-time, and sponsoring roles.</p>
+
+    <div class="resources-grid">
+      <a class="res-card" href="https://www.seek.com.au" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#E8F4FD;">🔎</div>
+        <h3>SEEK</h3>
+        <p>Australia's #1 job site. Massive listing volume including grad roles and many that offer visa sponsorship. Use keyword "visa sponsorship" or "work rights" in your search.</p>
+        <div class="res-tags">
+          <span class="badge bg-blue">All levels</span>
+          <span class="badge bg-green">Visa-friendly</span>
+          <span class="badge bg-gray">Free</span>
+        </div>
+        <div class="res-link">Visit SEEK →</div>
+      </a>
+
+      <a class="res-card" href="https://www.linkedin.com/jobs" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#EBF5FB;">💼</div>
+        <h3>LinkedIn Jobs</h3>
+        <p>Essential for networking and job hunting. Many roles list sponsorship availability. Connect with recruiters and alumni from your university who work in your target companies.</p>
+        <div class="res-tags">
+          <span class="badge bg-blue">All levels</span>
+          <span class="badge bg-purple">Networking</span>
+          <span class="badge bg-gray">Free / Premium</span>
+        </div>
+        <div class="res-link">Visit LinkedIn →</div>
+      </a>
+
+      <a class="res-card" href="https://gradconnection.com.au" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#EFF8F0;">🎓</div>
+        <h3>GradConnection</h3>
+        <p>Dedicated graduate and internship platform. Every major graduate program in Australia is listed here. Ideal for Big 4, Big Banks, top tech companies and engineering firms.</p>
+        <div class="res-tags">
+          <span class="badge bg-green">Graduate</span>
+          <span class="badge bg-blue">Internship</span>
+          <span class="badge bg-gray">Free</span>
+        </div>
+        <div class="res-link">Visit GradConnection →</div>
+      </a>
+
+      <a class="res-card" href="https://au.prosple.com" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#F5F3FF;">🌟</div>
+        <h3>Prosple</h3>
+        <p>Find graduate programs, internships, and entry-level jobs filtered to your course. Features salary data and employer reviews from past interns and grads.</p>
+        <div class="res-tags">
+          <span class="badge bg-purple">Graduate</span>
+          <span class="badge bg-blue">Internship</span>
+          <span class="badge bg-gray">Free</span>
+        </div>
+        <div class="res-link">Visit Prosple →</div>
+      </a>
+
+      <a class="res-card" href="https://au.indeed.com" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#FFF7ED;">🔍</div>
+        <h3>Indeed</h3>
+        <p>Global job board with strong Australian presence. Good for part-time and casual roles while studying. Search "student visa welcome" or "no sponsorship required" to narrow results.</p>
+        <div class="res-tags">
+          <span class="badge bg-amber">Part-time</span>
+          <span class="badge bg-gray">Casual</span>
+          <span class="badge bg-blue">Full-time</span>
+        </div>
+        <div class="res-link">Visit Indeed →</div>
+      </a>
+
+      <a class="res-card" href="https://www.graduatecareers.com.au" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#FEF2F2;">🏆</div>
+        <h3>Graduate Careers Australia</h3>
+        <p>Curated graduate employment resources and the annual GradAustralia guide. Includes employer profiles and salary benchmarks. Good for researching where to apply.</p>
+        <div class="res-tags">
+          <span class="badge bg-red">Graduate</span>
+          <span class="badge bg-gray">Research</span>
+          <span class="badge bg-sky">Salary Data</span>
+        </div>
+        <div class="res-link">Visit GCA →</div>
+      </a>
+
+      <a class="res-card" href="https://www.ato.gov.au/individuals-and-families/tax-file-number" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#F0F9FF;">🏛️</div>
+        <h3>ATO — Apply for TFN</h3>
+        <p>Apply for your Tax File Number through the Australian Taxation Office. You need this before starting any job in Australia. Apply online; takes about 28 days for foreign passport holders.</p>
+        <div class="res-tags">
+          <span class="badge bg-sky">Government</span>
+          <span class="badge bg-green">Essential</span>
+        </div>
+        <div class="res-link">Apply for TFN →</div>
+      </a>
+
+      <a class="res-card" href="https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#ECFDF5;">💰</div>
+        <h3>ATO — Superannuation</h3>
+        <p>Learn about superannuation — your employer must pay 11.5% of your earnings into a super fund. Choose your own super fund when you start a new job using a Super Choice form.</p>
+        <div class="res-tags">
+          <span class="badge bg-green">Super</span>
+          <span class="badge bg-sky">Government</span>
+        </div>
+        <div class="res-link">Learn about Super →</div>
+      </a>
+
+      <a class="res-card" href="https://immi.homeaffairs.gov.au/visas/already-have-a-visa/check-visa-details-and-conditions/check-conditions-online" target="_blank" rel="noopener">
+        <div class="res-logo" style="background:#EEF2FF;">🛂</div>
+        <h3>VEVO — Check Work Rights</h3>
+        <p>Verify your own visa conditions and work rights using the government's VEVO system. Share this with employers to confirm you have the right to work in Australia.</p>
+        <div class="res-tags">
+          <span class="badge bg-blue">Visa</span>
+          <span class="badge bg-sky">Government</span>
+          <span class="badge bg-green">Free</span>
+        </div>
+        <div class="res-link">Check VEVO →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="logo"><div class="logo-mark">G</div> GradWork AU</a>
+        <p>Helping international students navigate the Australian job market — from visa rights to first offer.</p>
+      </div>
+      <div class="footer-col">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#jobs">Job Board</a></li>
+          <li><a href="#workrights">Work Rights</a></li>
+          <li><a href="#checklist">Checklist</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Work Rights</h4>
+        <ul>
+          <li><a href="#workrights">Student Visa 500</a></li>
+          <li><a href="#workrights">485 Grad Visa</a></li>
+          <li><a href="#workrights">VEVO Check</a></li>
+          <li><a href="#workrights">482 / 186 Visas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://www.ato.gov.au" target="_blank" rel="noopener">ATO (Tax)</a></li>
+          <li><a href="https://seek.com.au" target="_blank" rel="noopener">SEEK Jobs</a></li>
+          <li><a href="https://gradconnection.com.au" target="_blank" rel="noopener">GradConnection</a></li>
+          <li><a href="https://immi.homeaffairs.gov.au" target="_blank" rel="noopener">Home Affairs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">⚠️ <strong>Disclaimer:</strong> This site provides general information only and is not legal or migration advice. Visa conditions change — always verify with the Department of Home Affairs or a registered migration agent.</p>
+      <p style="white-space:nowrap;">© 2025 GradWork AU</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════ -->
+<script>
+/* ── Job Data ─────────────────────────────────────────────────────────── */
+const JOBS = [
+  {
+    id: 1, title: "Software Engineer — Graduate Program",
+    company: "Atlassian", location: "Sydney", type: "graduate", industry: "tech",
+    salary: "$90k – $105k", visa: true, posted: "1 day ago",
+    color: "#0052CC",
+    desc: "Join Atlassian's world-class graduate program and build tools used by millions of teams globally. Rotations across Teams, Jira, and Confluence squads.",
+    tags: ["grad", "tech", "visa"]
+  },
+  {
+    id: 2, title: "Data Analyst Internship",
+    company: "Canva", location: "Sydney", type: "internship", industry: "tech",
+    salary: "$35 / hr", visa: true, posted: "2 days ago",
+    color: "#8B5CF6",
+    desc: "Work with Canva's growth data team to surface insights that shape product decisions for 150M+ users. Python and SQL skills required.",
+    tags: ["internship", "data", "visa"]
+  },
+  {
+    id: 3, title: "Graduate Accountant",
+    company: "Deloitte", location: "Melbourne", type: "graduate", industry: "finance",
+    salary: "$68k – $74k", visa: true, posted: "3 days ago",
+    color: "#86BC25",
+    desc: "Start your career at Deloitte's Audit & Assurance division. Work on blue-chip clients and earn your CA qualification with full study support.",
+    tags: ["grad", "finance", "ca", "visa"]
+  },
+  {
+    id: 4, title: "Junior Frontend Developer",
+    company: "REA Group", location: "Melbourne", type: "full-time", industry: "tech",
+    salary: "$78k – $88k", visa: true, posted: "2 days ago",
+    color: "#E84626",
+    desc: "Build React-based features for realestate.com.au, Australia's #1 property portal. Strong React + TypeScript skills valued.",
+    tags: ["tech", "react", "visa"]
+  },
+  {
+    id: 5, title: "Business Analyst",
+    company: "Commonwealth Bank", location: "Sydney", type: "full-time", industry: "finance",
+    salary: "$82k – $95k", visa: true, posted: "4 days ago",
+    color: "#F59E0B",
+    desc: "Drive digital transformation projects within CBA's retail banking division. Agile methodology, stakeholder management, and data analysis central to the role.",
+    tags: ["finance", "ba", "visa"]
+  },
+  {
+    id: 6, title: "Mechanical Engineer — Graduate",
+    company: "Arup", location: "Sydney", type: "graduate", industry: "engineering",
+    salary: "$72k – $80k", visa: true, posted: "5 days ago",
+    color: "#E11D48",
+    desc: "Work on iconic infrastructure and building projects across Australia. Arup supports graduates through CPEng accreditation.",
+    tags: ["grad", "engineering", "visa"]
+  },
+  {
+    id: 7, title: "Marketing Coordinator",
+    company: "SEEK", location: "Melbourne", type: "full-time", industry: "marketing",
+    salary: "$65k – $72k", visa: false, posted: "1 week ago",
+    color: "#1E90FF",
+    desc: "Coordinate digital marketing campaigns across SEO, SEM, and social for SEEK's consumer products. Strong analytical mindset required.",
+    tags: ["marketing", "digital"]
+  },
+  {
+    id: 8, title: "UX / UI Designer",
+    company: "Xero", location: "Melbourne", type: "full-time", industry: "tech",
+    salary: "$80k – $95k", visa: true, posted: "3 days ago",
+    color: "#13B5EA",
+    desc: "Design intuitive financial product experiences for Xero's small business accounting platform. Figma, user research, and design systems experience needed.",
+    tags: ["design", "ux", "visa"]
+  },
+  {
+    id: 9, title: "Financial Analyst",
+    company: "ANZ Bank", location: "Melbourne", type: "full-time", industry: "finance",
+    salary: "$85k – $98k", visa: true, posted: "3 days ago",
+    color: "#1B5299",
+    desc: "Support ANZ's institutional banking team with financial modelling, market analysis, and risk reporting. CFA or CA candidates preferred.",
+    tags: ["finance", "analyst", "visa"]
+  },
+  {
+    id: 10, title: "Civil Engineer — Infrastructure",
+    company: "GHD Group", location: "Brisbane", type: "full-time", industry: "engineering",
+    salary: "$78k – $90k", visa: true, posted: "6 days ago",
+    color: "#0EA5E9",
+    desc: "Deliver civil and structural engineering solutions for transport, water, and urban infrastructure projects across Queensland.",
+    tags: ["engineering", "civil", "visa"]
+  },
+  {
+    id: 11, title: "Barista / Café Team Member",
+    company: "Various Cafés", location: "Melbourne", type: "part-time", industry: "hospitality",
+    salary: "$28 – $32 / hr", visa: false, posted: "2 days ago",
+    color: "#92400E",
+    desc: "Flexible shifts to fit around your study timetable. All barista equipment training provided. Great for international students needing casual income.",
+    tags: ["casual", "part-time", "student-friendly"]
+  },
+  {
+    id: 12, title: "Graduate Consultant",
+    company: "PwC Australia", location: "Sydney", type: "graduate", industry: "consulting",
+    salary: "$72k – $78k", visa: true, posted: "4 days ago",
+    color: "#D93025",
+    desc: "Join PwC's consulting graduate intake and work across digital, strategy, and operations engagements for Australia's largest organisations.",
+    tags: ["grad", "consulting", "visa"]
+  },
+  {
+    id: 13, title: "IT Support Engineer",
+    company: "NAB", location: "Melbourne", type: "full-time", industry: "tech",
+    salary: "$72k – $82k", visa: true, posted: "5 days ago",
+    color: "#E02020",
+    desc: "Provide L2/L3 infrastructure and desktop support across NAB's national network. ITIL certification and cloud experience valued.",
+    tags: ["tech", "support", "visa"]
+  },
+  {
+    id: 14, title: "Customer Service Specialist (Part-time)",
+    company: "Woolworths Group", location: "Sydney", type: "part-time", industry: "retail",
+    salary: "$27 / hr + penalties", visa: false, posted: "1 day ago",
+    color: "#007837",
+    desc: "Flexible weekend and evening shifts at Woolworths supermarkets across greater Sydney. No experience needed — full training provided.",
+    tags: ["part-time", "casual", "retail"]
+  },
+  {
+    id: 15, title: "Software Test Engineer",
+    company: "Telstra", location: "Melbourne", type: "full-time", industry: "tech",
+    salary: "$88k – $100k", visa: true, posted: "1 week ago",
+    color: "#4B2681",
+    desc: "Build and run automated test suites for Telstra's core network and digital products. Selenium, Cypress, or Playwright experience valued.",
+    tags: ["tech", "qa", "automation", "visa"]
+  },
+  {
+    id: 16, title: "Research Assistant — Part-time",
+    company: "University of Melbourne", location: "Melbourne", type: "part-time", industry: "education",
+    salary: "$32 – $38 / hr", visa: false, posted: "3 days ago",
+    color: "#003087",
+    desc: "Support academic research projects in the Faculty of Engineering. Flexible hours aligned to semester timetable. Open to PhD and Masters students.",
+    tags: ["research", "part-time", "academic"]
+  },
+  {
+    id: 17, title: "Environmental Engineer — Graduate",
+    company: "Jacobs Engineering", location: "Perth", type: "graduate", industry: "engineering",
+    salary: "$74k – $82k", visa: true, posted: "1 week ago",
+    color: "#2563EB",
+    desc: "Work on environmental impact assessments, remediation, and sustainability projects in WA's resources and infrastructure sectors.",
+    tags: ["grad", "engineering", "environmental", "visa"]
+  },
+  {
+    id: 18, title: "Risk Analyst Intern",
+    company: "Westpac", location: "Sydney", type: "internship", industry: "finance",
+    salary: "$30 – $34 / hr", visa: true, posted: "2 days ago",
+    color: "#DA1710",
+    desc: "10-week summer internship in Westpac's Enterprise Risk Management team. Exposure to credit, market, and operational risk frameworks.",
+    tags: ["internship", "finance", "risk", "visa"]
+  },
+  {
+    id: 19, title: "Cloud Solutions Architect",
+    company: "Amazon Web Services", location: "Sydney", type: "full-time", industry: "tech",
+    salary: "$130k – $160k", visa: true, posted: "4 days ago",
+    color: "#FF9900",
+    desc: "Help enterprise customers design and migrate to AWS cloud architectures. SA Pro certification preferred; experience with large-scale systems required.",
+    tags: ["tech", "cloud", "aws", "visa"]
+  },
+  {
+    id: 20, title: "HR Graduate — People & Culture",
+    company: "KPMG Australia", location: "Sydney", type: "graduate", industry: "consulting",
+    salary: "$68k – $74k", visa: true, posted: "5 days ago",
+    color: "#00338D",
+    desc: "Start your HR career inside one of the Big 4, supporting talent acquisition, L&D, and culture initiatives across KPMG's national practice.",
+    tags: ["grad", "hr", "consulting", "visa"]
+  }
+];
+
+/* ── Checklist Data ───────────────────────────────────────────────────── */
+const CHECKLISTS = [
+  {
+    id: "resume", title: "Resume", icon: "📄",
+    iconBg: "#EEF2FF",
+    items: [
+      "Tailor your resume to 1–2 pages for Australian employers",
+      "State your work rights / visa status clearly at the top",
+      "Highlight relevant coursework, projects, and academic achievements",
+      "Use Australian English spelling (e.g. 'organisation', 'programme')",
+      "Include a professional LinkedIn profile URL",
+      "List experiences in reverse-chronological order",
+      "Quantify achievements (e.g. 'increased efficiency by 30%')"
+    ]
+  },
+  {
+    id: "coverletter", title: "Cover Letter", icon: "✍️",
+    iconBg: "#ECFDF5",
+    items: [
+      "Research the company's values and recent news before writing",
+      "Mention your Australian work rights explicitly — don't leave employers guessing",
+      "Keep it to one page, around 3–4 paragraphs",
+      "Address the hiring manager by name if possible",
+      "Explain why you want THIS role at THIS company (not generic)",
+      "Proof-read for spelling and grammar — use Grammarly"
+    ]
+  },
+  {
+    id: "legal", title: "Legal & Tax", icon: "🏛️",
+    iconBg: "#FFF7ED",
+    items: [
+      "Apply for a Tax File Number (TFN) via the ATO website",
+      "Open an Australian bank account (bank letter needed for TFN)",
+      "Choose a superannuation fund and fill in Super Choice form on day 1",
+      "Check your visa conditions on VEVO — save a screenshot",
+      "Keep your Confirmation of Enrolment (CoE) current",
+      "Obtain a signed TFN declaration to give your new employer"
+    ]
+  },
+  {
+    id: "application", title: "Job Applications", icon: "🎯",
+    iconBg: "#F5F3FF",
+    items: [
+      "Set up job alerts on SEEK, LinkedIn, and GradConnection",
+      "Apply to graduate programs early — many close in March/April",
+      "Network on LinkedIn: connect with alumni at your target companies",
+      "Prepare answers for behavioural questions using the STAR method",
+      "Research typical salaries in your field using SEEK Salary Insights",
+      "Follow up applications 1–2 weeks after submission",
+      "Prepare your references — ideally supervisors or lecturers who know your work"
+    ]
+  },
+  {
+    id: "interview", title: "Interview Prep", icon: "💬",
+    iconBg: "#FEF2F2",
+    items: [
+      "Practise the 'Tell me about yourself' 90-second pitch",
+      "Prepare 3–5 STAR-method stories covering teamwork, leadership, challenge",
+      "Research the company's products, revenue, and recent news",
+      "Prepare 3 thoughtful questions to ask the interviewer",
+      "For virtual interviews: test your camera, mic, and internet beforehand",
+      "Dress professionally even for video interviews",
+      "Send a thank-you email within 24 hours of the interview"
+    ]
+  },
+  {
+    id: "onboarding", title: "Starting Work", icon: "🚀",
+    iconBg: "#F0F9FF",
+    items: [
+      "Confirm hours don't exceed 48/fortnight if still on a student visa",
+      "Complete your Tax File Number Declaration form for your employer",
+      "Enrol in (or roll over to) your chosen superannuation fund",
+      "Request payslips each pay cycle and reconcile with ATO records",
+      "Note: you can claim tax deductions for work-related study and equipment",
+      "Save money from each payslip — you can claim your super back when you leave Australia permanently"
+    ]
+  }
+];
+
+/* ── State ────────────────────────────────────────────────────────────── */
+let visaOnly = false;
+let savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+let checkedItems = JSON.parse(localStorage.getItem('checkedItems') || '{}');
+
+/* ── Render Jobs ──────────────────────────────────────────────────────── */
+function renderJobs(jobs) {
+  const grid = document.getElementById('jobsGrid');
+  const count = document.getElementById('resultCount');
+  const heroCount = document.getElementById('countVisible');
+  count.textContent = `Showing ${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
+  heroCount.textContent = jobs.length;
+
+  if (!jobs.length) {
+    grid.innerHTML = `
+      <div class="no-results">
+        <div class="icon">🔍</div>
+        <h3>No jobs match your filters</h3>
+        <p>Try adjusting your filters or <button onclick="clearFilters()" style="color:var(--primary);font-weight:700;background:none;border:none;cursor:pointer;font-size:inherit;">clear all filters</button> to see all listings.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = jobs.map(j => {
+    const isSaved = savedJobs.includes(j.id);
+    const typeBadge = {
+      graduate: '<span class="badge bg-purple">Graduate</span>',
+      internship: '<span class="badge bg-blue">Internship</span>',
+      'full-time': '<span class="badge bg-sky">Full-time</span>',
+      'part-time': '<span class="badge bg-amber">Part-time</span>',
+    }[j.type] || '';
+
+    const visaBadge = j.visa
+      ? '<span class="badge bg-green">✓ Visa Sponsorship</span>'
+      : '<span class="badge bg-gray">No Sponsorship</span>';
+
+    return `
+      <div class="job-card ${j.visa ? 'visa-ok' : ''}" data-id="${j.id}">
+        <div class="card-top">
+          <div class="c-logo" style="background:${j.color};">${j.company.slice(0,2).toUpperCase()}</div>
+          <div class="card-info">
+            <div class="card-title">${j.title}</div>
+            <div class="card-company">${j.company} · ${j.location}</div>
+          </div>
+          <button class="save-btn ${isSaved ? 'saved' : ''}"
+            onclick="toggleSave(${j.id}, event)"
+            title="${isSaved ? 'Unsave' : 'Save job'}">
+            ${isSaved ? '★' : '☆'}
+          </button>
+        </div>
+        <div class="card-meta">
+          ${typeBadge}
+          <span class="badge bg-gray">📍 ${j.location}</span>
+          ${visaBadge}
+        </div>
+        <p class="card-desc">${j.desc}</p>
+        <div class="card-footer">
+          <div>
+            <div class="card-salary">${j.salary}</div>
+            <div class="card-posted">${j.posted}</div>
+          </div>
+          <a href="https://www.seek.com.au/jobs?keywords=${encodeURIComponent(j.title + ' ' + j.company)}"
+             target="_blank" rel="noopener" class="apply-btn">Apply →</a>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Filters ──────────────────────────────────────────────────────────── */
+function applyFilters() {
+  const type     = document.getElementById('fType').value;
+  const industry = document.getElementById('fIndustry').value;
+  const location = document.getElementById('fLocation').value;
+  const q        = document.getElementById('heroSearch').value.toLowerCase().trim();
+
+  const filtered = JOBS.filter(j => {
+    if (visaOnly && !j.visa) return false;
+    if (type     && j.type     !== type)     return false;
+    if (industry && j.industry !== industry) return false;
+    if (location && j.location !== location) return false;
+    if (q) {
+      const haystack = (j.title + j.company + j.desc + j.tags.join(' ')).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  renderJobs(filtered);
+}
+
+function toggleVisa() {
+  visaOnly = !visaOnly;
+  const btn = document.getElementById('visaBtn');
+  btn.classList.toggle('on', visaOnly);
+  applyFilters();
+}
+
+function clearFilters() {
+  document.getElementById('fType').value = '';
+  document.getElementById('fIndustry').value = '';
+  document.getElementById('fLocation').value = '';
+  document.getElementById('heroSearch').value = '';
+  visaOnly = false;
+  document.getElementById('visaBtn').classList.remove('on');
+  applyFilters();
+}
+
+function doSearch() {
+  document.querySelector('#jobs').scrollIntoView({ behavior: 'smooth' });
+  applyFilters();
+}
+
+/* ── Save / Bookmark ──────────────────────────────────────────────────── */
+function toggleSave(id, e) {
+  e.stopPropagation();
+  const idx = savedJobs.indexOf(id);
+  if (idx === -1) savedJobs.push(id);
+  else savedJobs.splice(idx, 1);
+  localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+  applyFilters();
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+function openTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+/* ── Checklist ────────────────────────────────────────────────────────── */
+function renderChecklist() {
+  const grid = document.getElementById('checklistGrid');
+  grid.innerHTML = CHECKLISTS.map(cat => {
+    const total   = cat.items.length;
+    const catDone = cat.items.filter((_, i) => checkedItems[`${cat.id}-${i}`]).length;
+    const pct     = total ? Math.round((catDone / total) * 100) : 0;
+
+    const itemsHtml = cat.items.map((text, i) => {
+      const key   = `${cat.id}-${i}`;
+      const done  = !!checkedItems[key];
+      return `
+        <div class="cl-item ${done ? 'done' : ''}" onclick="toggleCheck('${cat.id}', ${i})">
+          <div class="cl-box"></div>
+          <span class="cl-text">${text}</span>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="cl-card">
+        <div class="cl-card-head">
+          <div class="cl-icon" style="background:${cat.iconBg};">${cat.icon}</div>
+          <h3>${cat.title}</h3>
+        </div>
+        ${itemsHtml}
+        <div class="cl-progress">
+          <div class="prog-bar"><div class="prog-fill" id="prog-${cat.id}" style="width:${pct}%"></div></div>
+          <span class="prog-text" id="progtext-${cat.id}">${catDone}/${total}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleCheck(catId, idx) {
+  const key = `${catId}-${idx}`;
+  checkedItems[key] = !checkedItems[key];
+  localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
+  renderChecklist();
+}
+
+/* ── Mobile Nav ───────────────────────────────────────────────────────── */
+document.getElementById('hamBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+  document.querySelector('#navbar').classList.toggle('nav-mobile-open');
+});
+
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.querySelector('#navbar').classList.remove('nav-mobile-open');
+}
+
+/* ── Enter key search ─────────────────────────────────────────────────── */
+document.getElementById('heroSearch').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+document.getElementById('heroSearch').addEventListener('input', applyFilters);
+
+/* ── Init ─────────────────────────────────────────────────────────────── */
+renderJobs(JOBS);
+renderChecklist();
+</script>
+</body>
+</html>
