@@ -563,6 +563,13 @@
 ════════════════════════════════════════════════════════════ -->
 <section id="jobs">
   <div class="container">
+    <div class="alert alert-amber" style="margin-bottom:1.5rem;">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        <strong>Always check citizenship requirements before applying</strong>
+        <p>Some Australian employers — particularly telcos, banks with government contracts, defence contractors, and public-sector agencies — require applicants to be <strong>Australian Citizens or Permanent Residents</strong> for certain roles, even when the job ad doesn't say so clearly. The listings below focus on employers known to be open to international work rights, but always read the full job ad and ask HR before investing time in an application.</p>
+      </div>
+    </div>
     <div class="jobs-grid" id="jobsGrid">
       <!-- populated by JS -->
     </div>
@@ -784,6 +791,17 @@
             <li>Starting work before your course officially starts</li>
             <li>Not declaring your visa status to an employer — they find out via VEVO anyway</li>
             <li>Letting your CoE lapse — always maintain enrolment if on a student visa</li>
+            <li>Applying for roles that require Australian citizenship without checking — saves time for both you and the employer</li>
+          </ul>
+        </div>
+        <div class="info-card" style="border-color:#FCA5A5;background:#FEF2F2;">
+          <h4 style="color:#991B1B;">🏛️ Roles That Commonly Require Citizenship</h4>
+          <ul>
+            <li><strong>Federal &amp; state government jobs</strong> (APS, Services Australia, ATO, Defence) — almost always require Australian citizenship</li>
+            <li><strong>Defence contractors</strong> (Leidos, BAE Systems, L3Harris) — security clearances require citizenship</li>
+            <li><strong>Telco &amp; infrastructure companies with government contracts</strong> — some tech and operations roles are citizenship-restricted</li>
+            <li><strong>Major banks (certain divisions)</strong> — compliance, fraud, and government-facing teams may require citizenship or PR</li>
+            <li><strong>Tip:</strong> If in doubt, email HR before applying: "Is this role open to candidates on a [visa type]?" — a quick email saves weeks of effort</li>
           </ul>
         </div>
         <div class="info-card">
@@ -1082,12 +1100,12 @@ const JOBS = [
     tags: ["grad", "consulting", "visa"]
   },
   {
-    id: 13, title: "IT Support Engineer",
-    company: "NAB", location: "Melbourne", type: "full-time", industry: "tech",
-    salary: "$72k – $82k", visa: true, posted: "5 days ago",
-    color: "#E02020",
-    desc: "Provide L2/L3 infrastructure and desktop support across NAB's national network. ITIL certification and cloud experience valued.",
-    tags: ["tech", "support", "visa"]
+    id: 13, title: "Product Manager Intern",
+    company: "Afterpay / Block", location: "Sydney", type: "internship", industry: "tech",
+    salary: "$35 – $40 / hr", visa: true, posted: "2 days ago",
+    color: "#00A4A6",
+    desc: "12-week internship on Afterpay's merchant growth team. Work on product discovery, user research, and roadmap planning for Australia's leading BNPL platform.",
+    tags: ["internship", "product", "fintech", "visa"]
   },
   {
     id: 14, title: "Customer Service Specialist (Part-time)",
@@ -1098,12 +1116,12 @@ const JOBS = [
     tags: ["part-time", "casual", "retail"]
   },
   {
-    id: 15, title: "Software Test Engineer",
-    company: "Telstra", location: "Melbourne", type: "full-time", industry: "tech",
-    salary: "$88k – $100k", visa: true, posted: "1 week ago",
-    color: "#4B2681",
-    desc: "Build and run automated test suites for Telstra's core network and digital products. Selenium, Cypress, or Playwright experience valued.",
-    tags: ["tech", "qa", "automation", "visa"]
+    id: 15, title: "Software Engineer — Full Stack",
+    company: "Culture Amp", location: "Melbourne", type: "full-time", industry: "tech",
+    salary: "$95k – $115k", visa: true, posted: "4 days ago",
+    color: "#FF5C5C",
+    desc: "Build scalable features for Culture Amp's people analytics and employee engagement platform, used by 6,000+ companies worldwide. Ruby, React, and Elixir stack.",
+    tags: ["tech", "fullstack", "saas", "visa"]
   },
   {
     id: 16, title: "Research Assistant — Part-time",
@@ -1192,6 +1210,7 @@ const CHECKLISTS = [
     items: [
       "Set up job alerts on SEEK, LinkedIn, and GradConnection",
       "Apply to graduate programs early — many close in March/April",
+      "Check each job ad for 'Australian Citizens/PR only' — email HR if unclear",
       "Network on LinkedIn: connect with alumni at your target companies",
       "Prepare answers for behavioural questions using the STAR method",
       "Research typical salaries in your field using SEEK Salary Insights",
