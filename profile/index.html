@@ -339,19 +339,23 @@ function missing(){
   if(k==="pickC") need(DATA.CA.map(function(x){return x.id}));
   if(k==="pickD") need(DATA.DB.map(function(x){return x.id}));
   if(k==="observer") need(X_ITEMS.map(function(x){return x[0]}));
+  if(k==="routine"){
+    var lim={H1:[0,14],H2:[0,600],H3:[0,60],H4:[0,365],H5:[0,24],H6:[0,500]};
+    Object.keys(lim).forEach(function(id){ var v=st.a[id]; if(v!==undefined && v!==""){ var n=parseFloat(v); if(isNaN(n)||n<lim[id][0]||n>lim[id][1]) ids.push(id) } });
+  }
   if(k==="scen") DATA.SC.forEach(function(sc){ if(!st.a[sc.id+"_most"]||!st.a[sc.id+"_least"]) ids.push(sc.id) });
   return ids;
 }
 function advance(force){
   var plan=PLANS[st.mode], p=plan[st.step];
   if(!force){
-    var miss=missing();
+    var miss=missing(), k0=p.k;
     document.querySelectorAll(".item.missing").forEach(function(e){e.classList.remove("missing")});
     if(miss.length){
       var err=document.getElementById("err");
-      err.hidden=false; err.textContent=miss.length+(miss.length===1?" question still needs":" questions still need")+" an answer: "+miss.slice(0,8).join(", ")+(miss.length>8?"…":"");
+      err.hidden=false; err.textContent=miss.length+(miss.length===1?" question still needs":" questions still need")+(k0==="routine"?" a realistic number: ":" an answer: ")+miss.slice(0,8).join(", ")+(miss.length>8?"…":"");
       miss.forEach(function(id){ var el=document.getElementById("it-"+id); if(el) el.classList.add("missing") });
-      var first=document.getElementById("it-"+miss[0])||err;
+      var first=document.getElementById("it-"+miss[0])||document.getElementById("in-"+miss[0])||err;
       if(first.scrollIntoView) first.scrollIntoView({block:"center",behavior:"smooth"});
       return;
     }
@@ -382,7 +386,15 @@ app.addEventListener("click",function(e){
   }
   var it=document.getElementById("it-"+id); if(it) it.classList.remove("missing");
 });
-function onField(e){ var t=e.target; if(t && t.getAttribute && t.getAttribute("data-id")){ setA(t.getAttribute("data-id"), t.value) } }
+function onField(e){
+  var t=e.target; if(!(t && t.getAttribute && t.getAttribute("data-id"))) return;
+  var id=t.getAttribute("data-id"), part=PLANS[st.mode][st.step].k;
+  if(!st.cm) st.cm={};
+  if(st.a[id]===undefined){ st.rt[id]=Date.now()-(st.parts[part]||Date.now()); st.ch[id]=0 }
+  st.a[id]=t.value;
+  if(e.type==="change"){ if(st.cm[id]!==undefined && st.cm[id]!==t.value){ st.ch[id]=(st.ch[id]||0)+1 } st.cm[id]=t.value }
+  persist();
+}
 app.addEventListener("input",onField); app.addEventListener("change",onField);
 
 /* ---------- landing / gate / done ---------- */
