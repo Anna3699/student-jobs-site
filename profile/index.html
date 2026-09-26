@@ -464,6 +464,13 @@ function doneScreen(){
 /* ---------- boot ---------- */
 (function(){
   var hash=(location.hash||"").replace("#","");
+  if(hash==="reset"){
+    ["sft_s1","sft_s2","sft_obs"].forEach(function(k){ try{localStorage.removeItem(k)}catch(e){} });
+    try{ history.replaceState(null,"",location.pathname) }catch(e){}
+    app.innerHTML='<div class="stack-lg"><div class="stack"><p class="eyebrow">Reset</p><h1>Cleared on this device</h1><p class="lead">All saved answers in this browser have been removed. The test will start fresh.</p></div><div><button class="btn" type="button" id="fresh">Go to the start</button></div></div>';
+    document.getElementById("fresh").onclick=function(){ st=null; render() };
+    return;
+  }
   if(hash==="observer"){ st=load("sft_obs")||newState("obs"); persist() }
   render();
 })();
